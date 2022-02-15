@@ -1,11 +1,18 @@
 import n from './Navbar.module.css'
+import {NavLink} from "react-router-dom";
 
 function Nav(){
     return(
         <nav className={n.nav}>
-            <div className={n.item}>profile</div>
-            <div className={n.item}>Main content</div>
-            <div className={n.item}>Messages</div>
+            <div className={n.item}>
+                <NavLink to="/profile">profile</NavLink>
+            </div>
+            <div className={n.item}>
+                <NavLink to="/main_content">Main content</NavLink>
+            </div>
+            <div className={n.item}>
+                <NavLink to="/dialogs">Messages</NavLink>
+            </div>
         </nav>
     );
 }

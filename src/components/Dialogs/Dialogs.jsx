@@ -10,19 +10,34 @@ const Message = (props) => {
     );
 }
 
+let DialogsData = [
+    {id: 1, name:"Anton" },
+    {id: 2, name:"Test" },
+    {id: 3, name:"Tonia" },
+    {id: 4, name:"Dima" },
+    {id: 5, name:"Gena" }
+];
+
+let MessagesData = [
+    {id: 1, value:"Hi!" },
+    {id: 2, value:"Test" },
+    {id: 3, value:"Tonia" },
+    {id: 4, value:"Dima" },
+    {id: 5, value:"Gena" }
+];
+
+// Преобразуем массивы с данными в верстку
+let arrayDialogs = DialogsData.map( el => <Dialog name={el.name} id={el.id}/>);
+let arrayMessages = MessagesData.map( el => <Message value={el.value}/> );
+
 function Dialogs(props){
     return (
         <div className={d.dialogs}>
             <div className={d.dialogsItems}>
-                <Dialog name="Anton" id="1"/>
-                <Dialog name="Test" id="2"/>
-                <Dialog name="Tonia" id="3"/>
-                <Dialog name="Dima" id="4"/>
+                {arrayDialogs}
             </div>
             <div className={d.messages}>
-                <Message value="Hi!"/>
-                <Message value="Hi-ji!"/>
-                <Message value="Lold!"/>
+                {arrayMessages}
             </div>
         </div>
     );

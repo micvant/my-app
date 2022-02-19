@@ -1,14 +1,7 @@
 import React from 'react'
 import d from './Dialogs.module.css'
 import Dialog from "./Dialog/Dialog";
-
-const Message = (props) => {
-    return (
-        <div className={d.messsage}>
-            {props.value}
-        </div>
-    );
-}
+import Message from "./Message/Message";
 
 let DialogsData = [
     {id: 1, name:"Anton" },

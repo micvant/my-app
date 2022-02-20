@@ -5,18 +5,23 @@ import React from 'react';
 function MyPosts(props){
 
     let ref = React.createRef();
-    let arrayPosts = props.PostData.map(post => <Post messages={post.value} img={post.img}/>);
+    let arrayPosts = props.state.PostData.map(post => <Post key={post.id} messages={post.value} img={post.img}/>);
 
     let addPost = () =>{
-        let text = ref.current.value;
-        props.addPost(text);
+        props.addPost();
     }
+
+    let updatePostText = () =>{
+        let text = ref.current.value;
+        props.updateNewPostText(text);
+    }
+
     return (
         <div className={p.myposts}>
             My posts
             <div>
                 <div>
-                    <textarea ref={ref}></textarea>
+                    <textarea ref={ref} value={props.state.newPostText} onChange={updatePostText}/>
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>

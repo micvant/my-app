@@ -3,10 +3,11 @@ import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 function Profile(props){
+
     return (
         <div className={p.content}>
             <ProfileInfo/>
-            <MyPosts PostData={props.PostData} addPost={props.addPost}/>
+            <MyPosts state={props.state} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>
         </div>
     );
 }

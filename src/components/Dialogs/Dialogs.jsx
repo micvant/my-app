@@ -3,27 +3,10 @@ import d from './Dialogs.module.css'
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
 
-// let DialogsData = [
-//     {id: 1, name:"Anton" },
-//     {id: 2, name:"Test" },
-//     {id: 3, name:"Tonia" },
-//     {id: 4, name:"Dima" },
-//     {id: 5, name:"Gena" }
-// ];
-//
-// let MessagesData = [
-//     {id: 1, value:"Hi!" },
-//     {id: 2, value:"Test" },
-//     {id: 3, value:"Tonia" },
-//     {id: 4, value:"Dima" },
-//     {id: 5, value:"Gena" }
-// ];
-
 function Dialogs(props){
-
     // Преобразуем массивы с данными в верстку
-    let arrayDialogs = props.state.DialogsData.map( el => <Dialog name={el.name} id={el.id}/>);
-    let arrayMessages = props.state.MessagesData.map( el => <Message value={el.value}/> );
+    let arrayDialogs = props.state.DialogsData.map( el => <Dialog key={el.id} name={el.name} id={el.id}/>);
+    let arrayMessages = props.state.MessagesData.map( el => <Message key={el.id} value={el.value}/> );
 
     return (
         <div className={d.dialogs}>

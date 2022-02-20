@@ -1,6 +1,7 @@
 import p from './MyPosts.module.css'
 import Post from './Post/Post'
 import React from 'react';
+import {addPostActionCreator, updateTextPostActionCreator} from "../../../Data/State";
 
 function MyPosts(props){
 
@@ -8,13 +9,15 @@ function MyPosts(props){
     let arrayPosts = props.state.PostData.map(post => <Post key={post.id} messages={post.value} img={post.img}/>);
 
     let addPost = () =>{
-        props.dispatch({type : 'ADD-POST'});
+        let action = addPostActionCreator();
+        props.dispatch(action);
     }
 
     let updatePostText = () =>{
 
         let text = ref.current.value;
-        props.dispatch({type : 'UPDATE-TEXT-POST', newText : text});
+        let action = updateTextPostActionCreator(text);
+        props.dispatch(action);
     }
 
     return (

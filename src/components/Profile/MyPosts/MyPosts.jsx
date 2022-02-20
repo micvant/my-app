@@ -8,12 +8,13 @@ function MyPosts(props){
     let arrayPosts = props.state.PostData.map(post => <Post key={post.id} messages={post.value} img={post.img}/>);
 
     let addPost = () =>{
-        props.addPost();
+        props.dispatch({type : 'ADD-POST'});
     }
 
     let updatePostText = () =>{
+
         let text = ref.current.value;
-        props.updateNewPostText(text);
+        props.dispatch({type : 'UPDATE-TEXT-POST', newText : text});
     }
 
     return (

@@ -1,3 +1,6 @@
+import {profileReducer} from "./profile-reducer";
+import {dialogsReducer} from "./dialogs-reducer";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_TEXT_POST = 'UPDATE-TEXT-POST';
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
@@ -37,7 +40,10 @@ let store = {
                 {id: 3, value: "Tonia"},
                 {id: 4, value: "Dima"},
                 {id: 5, value: "Gena"}
-            ]
+            ],
+            getLengthMessages() {
+               return this.MessagesData.length;
+            }
         },
 
         sidebar : {}
@@ -53,30 +59,11 @@ let store = {
 
     dispatch(action){
 
-        if(action.type == ADD_POST){
+       this._state.profilePage =  profileReducer(store.getState().profilePage, action);
+       this._state.dialogsPage =  dialogsReducer(store.getState().dialogsPage, action);
 
-            let count = this._state.profilePage.length++;
+       this._callSubscriber(this._state);
 
-            let newPost = {
-                id: count, value: this._state.profilePage.newPostText, img: ""
-            }
-            this._state.profilePage.PostData.push(newPost);
-            this._state.profilePage.newPostText = '';
-            this._callSubscriber(this._state);
-
-        }else if(action.type == UPDATE_TEXT_POST){
-
-            this._state.profilePage.newPostText = action.newText;
-            this._callSubscriber(this._state);
-
-        }else if(action.type == UPDATE_NEW_MESSAGE_TEXT){
-
-            this._state.dialogsPage.newMessageText = action.newMessage;
-            this._callSubscriber(this._state);
-
-        }else if(action.type == SEND_MESSAGE){
-
-        }
     },
 
     subscribe(observer){
@@ -84,6 +71,10 @@ let store = {
     }
 
 }
+
+export const sendMessageCreator = () => ({type : SEND_MESSAGE});
+
+export const updatePostTextCreator = (text) => ({ type : UPDATE_NEW_MESSAGE_TEXT, newMessage : text });
 
 export const addPostActionCreator = () => ({type : ADD_POST});
 

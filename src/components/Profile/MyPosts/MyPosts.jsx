@@ -5,7 +5,6 @@ import {addPostActionCreator, updateTextPostActionCreator} from "../../../Data/S
 
 function MyPosts(props){
 
-    let ref = React.createRef();
     let arrayPosts = props.state.PostData.map(post => <Post key={post.id} messages={post.value} img={post.img}/>);
 
     let addPost = () =>{
@@ -13,9 +12,9 @@ function MyPosts(props){
         props.dispatch(action);
     }
 
-    let updatePostText = () =>{
+    let updatePostText = (e) =>{
 
-        let text = ref.current.value;
+        let text = e.target.value;
         let action = updateTextPostActionCreator(text);
         props.dispatch(action);
     }
@@ -25,7 +24,7 @@ function MyPosts(props){
             My posts
             <div>
                 <div>
-                    <textarea ref={ref} value={props.state.newPostText} onChange={updatePostText}/>
+                    <textarea value={props.state.newPostText} onChange={updatePostText}/>
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>

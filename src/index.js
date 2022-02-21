@@ -6,15 +6,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 
-let rerenderThree = () => {
+let rerenderThree = (state) => {
     ReactDOM.render(
         <React.StrictMode>
-            <App state={store.getState()} dispatch={store.dispatch.bind(store)}/>
+            <App state={state} dispatch={store.dispatch.bind(store)}/>
         </React.StrictMode>,
         document.getElementById('root')
     );
 }
 
+rerenderThree(store.getState());
 store.subscribe(rerenderThree);
 
 reportWebVitals();

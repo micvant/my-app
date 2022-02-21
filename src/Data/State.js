@@ -1,12 +1,14 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_TEXT_POST = 'UPDATE-TEXT-POST';
-
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+const SEND_MESSAGE = 'SAND-MESSAGE';
 
 let store = {
 
     _state : {
 
         profilePage : {
+            newPostText: '',
             PostData : [
                 {id: 1, value: "Hi lol!", img: "https://avatarko.ru/img/kartinka/33/multfilm_lyagushka_32117.jpg"},
                 {
@@ -17,11 +19,11 @@ let store = {
                 {id: 3, value: "Kek", img: "https://avatarko.ru/img/kartinka/2/zhivotnye_kot_prikol_ochki_1637.jpg"},
                 {id: 4, value: "Dima", img: ""},
                 {id: 5, value: "Gena", img: ""}
-            ],
-            newPostText: ''
+            ]
         },
 
         dialogsPage : {
+            newMessageText : '',
             DialogsData: [
                 {id: 1, name: "Anton"},
                 {id: 2, name: "Test"},
@@ -60,19 +62,25 @@ let store = {
             }
             this._state.profilePage.PostData.push(newPost);
             this._state.profilePage.newPostText = '';
-            store._callSubscriber();
+            this._callSubscriber(this._state);
 
         }else if(action.type == UPDATE_TEXT_POST){
 
             this._state.profilePage.newPostText = action.newText;
-            store._callSubscriber();
+            this._callSubscriber(this._state);
+
+        }else if(action.type == UPDATE_NEW_MESSAGE_TEXT){
+
+            this._state.dialogsPage.newMessageText = action.newMessage;
+            this._callSubscriber(this._state);
+
+        }else if(action.type == SEND_MESSAGE){
 
         }
     },
 
     subscribe(observer){
         this._callSubscriber = observer;
-        this._callSubscriber();
     }
 
 }
@@ -80,6 +88,5 @@ let store = {
 export const addPostActionCreator = () => ({type : ADD_POST});
 
 export const updateTextPostActionCreator = (newText) => ({type : UPDATE_TEXT_POST, newText : newText});
-
 
 export default store;

@@ -4,37 +4,48 @@ const SEND_MESSAGE = 'SAND-MESSAGE';
 let initialState = {
     newMessageText : '',
     dialogs : [
-        {id: 1, name: "Anton"},
-        {id: 2, name: "Test"},
-        {id: 3, name: "Tonia"},
-        {id: 4, name: "Dima"},
-        {id: 5, name: "Gena"}
+        {id: 0, name: "Anton"},
+        {id: 1, name: "Test"},
+        {id: 2, name: "Tonia"},
+        {id: 3, name: "Dima"},
+        {id: 4, name: "Gena"}
     ],
     messages : [
-        {id: 1, value: "Hi!"},
-        {id: 2, value: "Test"},
-        {id: 3, value: "Tonia"},
-        {id: 4, value: "Dima"},
-        {id: 5, value: "Gena"}
-    ],
-    getLengthMessages() {
-        return this.messages.length;
-    }
+        {id: 0, value: "Hi!"},
+        {id: 1, value: "Test"},
+        {id: 2, value: "Tonia"},
+        {id: 3, value: "Dima"},
+        {id: 4, value: "Gena"}
+    ]
+}
+
+let updateNewMessageText = (state, action) => {
+    let copyState = {...state};
+    copyState.newMessageText = action.newMessage;
+    return copyState;
+}
+
+let sendMessage = (state) => {
+
+    let copyState = {...state};
+    copyState.messages = [...state.messages];
+
+    let count = copyState.messages.length;
+    let text = copyState.newMessageText;
+
+    let newMessage = {id: count, value: text};
+    copyState.messages.push(newMessage);
+    copyState.newMessageText = '';
+    return copyState;
 }
 
 export const dialogsReducer = (state = initialState, action) => {
 
-    switch(action.type){
+    switch (action.type) {
         case UPDATE_NEW_MESSAGE_TEXT :
-            state.newMessageText = action.newMessage;
-            return state;
+            return updateNewMessageText(state, action);
         case SEND_MESSAGE :
-            let lengthMessages = state.getLengthMessages();
-            let value = state.newMessageText;
-            let newMessage = {id: lengthMessages++, value: value};
-            state.messages.push(newMessage);
-            state.newMessageText = '';
-            return state;
+            return sendMessage(state);
         default:
             return state;
     }

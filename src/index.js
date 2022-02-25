@@ -7,22 +7,13 @@ import './index.css';
 import App from './App';
 import {Provider} from "react-redux";
 
-let rerenderThree = () => {
-
-    ReactDOM.render(
-        <React.StrictMode>
-            <Provider store={store}>
+ReactDOM.render(
+    <React.StrictMode>
+        <Provider store={store}>
             <App/>
-            </Provider>
-        </React.StrictMode>,
-        document.getElementById('root')
-    );
-}
-
-rerenderThree();
-store.subscribe(() => {
-    rerenderThree();
-});
-
+        </Provider>
+    </React.StrictMode>,
+    document.getElementById('root')
+);
 
 reportWebVitals();

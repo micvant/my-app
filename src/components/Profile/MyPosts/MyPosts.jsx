@@ -1,22 +1,18 @@
 import p from './MyPosts.module.css'
 import Post from './Post/Post'
 import React from 'react';
-import {addPostActionCreator, updateTextPostActionCreator} from "../../../Data/State";
 
 function MyPosts(props){
 
-    let arrayPosts = props.state.PostData.map(post => <Post key={post.id} messages={post.value} img={post.img}/>);
+    let arrayPosts = props.posts.map(post => <Post key={post.id} messages={post.value} img={post.img}/>);
 
-    let addPost = () =>{
-        let action = addPostActionCreator();
-        props.dispatch(action);
+    let onAddPost = () =>{
+        props.addPost();
     }
 
-    let updatePostText = (e) =>{
-
+    let onPostChange = (e) =>{
         let text = e.target.value;
-        let action = updateTextPostActionCreator(text);
-        props.dispatch(action);
+        props.updateNewPostText(text);
     }
 
     return (
@@ -24,10 +20,10 @@ function MyPosts(props){
             My posts
             <div>
                 <div>
-                    <textarea value={props.state.newPostText} onChange={updatePostText}/>
+                    <textarea value={props.newPostText} onChange={onPostChange}/>
                 </div>
                 <div>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={onAddPost}>Add post</button>
                 </div>
             </div>
             <div className={p.posts}>

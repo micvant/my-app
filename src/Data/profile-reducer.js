@@ -3,7 +3,7 @@ const UPDATE_TEXT_POST = 'UPDATE-TEXT-POST';
 
 let initialState = {
     newPostText: '',
-    PostData : [
+    posts : [
         {id: 1,
             value: "Hi lol!",
             img: "https://avatarko.ru/img/kartinka/33/multfilm_lyagushka_32117.jpg"},
@@ -31,7 +31,7 @@ export const profileReducer = (state= initialState, action) => {
             let count = state.length++;
 
             let newPost = {id: count, value: state.newPostText, img: ""}
-            state.PostData.push(newPost);
+            state.posts.push(newPost);
             state.newPostText = '';
             return state;
 
@@ -45,3 +45,7 @@ export const profileReducer = (state= initialState, action) => {
     }
 
 }
+
+export const addPostActionCreator = () => ({type : ADD_POST});
+
+export const updateNewPostText = (newText) => ({type : UPDATE_TEXT_POST, newText : newText});

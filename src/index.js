@@ -6,20 +6,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 
-let rerenderThree = (state) => {
+let rerenderThree = (store) => {
 
     ReactDOM.render(
         <React.StrictMode>
-            <App state={state} dispatch={store.dispatch.bind(store)}/>
+            <App store={store}/>
         </React.StrictMode>,
         document.getElementById('root')
     );
 }
 
-rerenderThree(store.getState());
+rerenderThree(store);
 store.subscribe(() => {
-    let state = store.getState();
-    rerenderThree(state);
+    rerenderThree(store);
 });
 
 

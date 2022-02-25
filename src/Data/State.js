@@ -78,6 +78,6 @@ export const updatePostTextCreator = (text) => ({ type : UPDATE_NEW_MESSAGE_TEXT
 
 export const addPostActionCreator = () => ({type : ADD_POST});
 
-export const updateTextPostActionCreator = (newText) => ({type : UPDATE_TEXT_POST, newText : newText});
+export const updateNewPostText = (newText) => ({type : UPDATE_TEXT_POST, newText : newText});
 
 export default store;

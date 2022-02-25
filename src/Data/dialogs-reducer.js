@@ -3,14 +3,14 @@ const SEND_MESSAGE = 'SAND-MESSAGE';
 
 let initialState = {
     newMessageText : '',
-    DialogsData: [
+    dialogs : [
         {id: 1, name: "Anton"},
         {id: 2, name: "Test"},
         {id: 3, name: "Tonia"},
         {id: 4, name: "Dima"},
         {id: 5, name: "Gena"}
     ],
-    MessagesData : [
+    messages : [
         {id: 1, value: "Hi!"},
         {id: 2, value: "Test"},
         {id: 3, value: "Tonia"},
@@ -18,7 +18,7 @@ let initialState = {
         {id: 5, value: "Gena"}
     ],
     getLengthMessages() {
-        return this.MessagesData.length;
+        return this.messages.length;
     }
 }
 
@@ -32,7 +32,7 @@ export const dialogsReducer = (state = initialState, action) => {
             let lengthMessages = state.getLengthMessages();
             let value = state.newMessageText;
             let newMessage = {id: lengthMessages++, value: value};
-            state.MessagesData.push(newMessage);
+            state.messages.push(newMessage);
             state.newMessageText = '';
             return state;
         default:
@@ -40,3 +40,7 @@ export const dialogsReducer = (state = initialState, action) => {
     }
 
 }
+
+export const sendMessageCreator = () => ({type : SEND_MESSAGE});
+
+export const updatePostTextCreator = (text) => ({ type : UPDATE_NEW_MESSAGE_TEXT, newMessage : text });

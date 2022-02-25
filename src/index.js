@@ -5,20 +5,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import {Provider} from "react-redux";
 
-let rerenderThree = (store) => {
+let rerenderThree = () => {
 
     ReactDOM.render(
         <React.StrictMode>
-            <App store={store}/>
+            <Provider store={store}>
+            <App/>
+            </Provider>
         </React.StrictMode>,
         document.getElementById('root')
     );
 }
 
-rerenderThree(store);
+rerenderThree();
 store.subscribe(() => {
-    rerenderThree(store);
+    rerenderThree();
 });
 
 

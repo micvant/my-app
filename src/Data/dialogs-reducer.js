@@ -20,23 +20,23 @@ let initialState = {
 }
 
 let updateNewMessageText = (state, action) => {
-    let copyState = {...state};
-    copyState.newMessageText = action.newMessage;
-    return copyState;
+    return {
+        ...state,
+        newMessageText : action.newMessage
+    };
 }
 
 let sendMessage = (state) => {
 
-    let copyState = {...state};
-    copyState.messages = [...state.messages];
-
-    let count = copyState.messages.length;
-    let text = copyState.newMessageText;
-
+    let count = state.messages.length;
+    let text = state.newMessageText;
     let newMessage = {id: count, value: text};
-    copyState.messages.push(newMessage);
-    copyState.newMessageText = '';
-    return copyState;
+        // спрэт оператор ...state
+    return {
+        ...state,
+        messages : [ ...state.messages,  newMessage],
+        newMessageText : ''
+    };
 }
 
 export const dialogsReducer = (state = initialState, action) => {

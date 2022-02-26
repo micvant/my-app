@@ -3,23 +3,22 @@ const UPDATE_TEXT_POST = 'UPDATE-TEXT-POST';
 
 let addPost = (state) => {
 
-    let copyState = {...state};
-    copyState.posts = [...state.posts];
-
     let count = state.length;
-    let text = copyState.newPostText;
-    let newPost = {id: count, value: text, img: ""}
+    let text = state.newPostText;
+    let newPost = {id: count, value: text, img: ""};
 
-    copyState.posts.push(newPost);
-    copyState.newPostText = '';
-    return copyState;
-}
+    return {...state,
+        posts : [...state.posts, newPost],
+        newPostText : ''
+    };
+};
 
 let updatePostText = (state, action) => {
-    let copyState = {...state};
-    copyState.newPostText = action.newText;
-    return copyState;
-}
+
+    return {...state,
+        newPostText : action.newText};
+};
+
 let initialState = {
     newPostText: '',
     posts : [
@@ -53,9 +52,9 @@ export const profileReducer = (state= initialState, action) => {
         default :
             return state;
 
-    }
+    };
 
-}
+};
 
 export const addPostActionCreator = () => ({type : ADD_POST});
 

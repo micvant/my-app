@@ -7,9 +7,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import MainContent from "./components/MainContent/MainContent";
 import Users from "./components/Users/Users";
+import UsersContainer from "./components/Users/UsersContainer";
 
 function App(props) {
-
   return (
       <BrowserRouter>
             <div className='app-wrapper'>
@@ -24,7 +24,7 @@ function App(props) {
                         <Route path="/profile/*"
                                element={<Profile store={props.store} />}/>
                        <Route path='/users/*'
-                           element={<Users store={props.store} />} />
+                           element={<UsersContainer/>} />
                     </Routes>
                 </div>
             </div>

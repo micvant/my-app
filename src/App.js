@@ -6,6 +6,7 @@ import Profile from "./components/Profile/Profile";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import MainContent from "./components/MainContent/MainContent";
+import Users from "./components/Users/Users";
 
 function App(props) {
 
@@ -22,6 +23,8 @@ function App(props) {
                                element={<MainContent />}/>
                         <Route path="/profile/*"
                                element={<Profile store={props.store} />}/>
+                       <Route path='/users/*'
+                           element={<Users store={props.store} />} />
                     </Routes>
                 </div>
             </div>

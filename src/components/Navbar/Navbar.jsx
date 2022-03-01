@@ -13,6 +13,10 @@ function Nav(){
             <div className={n.item}>
                 <NavLink to="/dialogs">Messages</NavLink>
             </div>
+
+            <div className={n.item}>
+                <NavLink to="/users">Users</NavLink>
+            </div>
         </nav>
     );
 }

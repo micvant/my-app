@@ -7,7 +7,6 @@ import Users from "./Users";
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        debugger;
         let path = `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}`;
         axios.get(path).then(response => {
             this.props.setUsers(response.data.items);
@@ -27,6 +26,9 @@ class UsersContainer extends React.Component {
 
     render() {
         return <Users
+            users={this.props.users}
+            changeFollowedUser={this.props.changeFollowedUser}
+            changeUnFollowedUser={this.props.changeUnFollowedUser}
             onPageChanged={this.onPageChanged}
             currentPage={this.props.currentPage}
             pageSize={this.props.pageSize}
@@ -34,7 +36,6 @@ class UsersContainer extends React.Component {
         />;
     }
 }
-
 
 let  mapStateToProps = (state) => {
     return {

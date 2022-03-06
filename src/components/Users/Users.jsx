@@ -22,7 +22,7 @@ let Users = (props) => {
             {pagesMap}
         </div>
         {
-            this.props.users.map(u => <div key={u.id}>
+            props.users.map(u => <div key={u.id}>
                 <span>
                  <div>
                     <img src={u.photos.small != null ? u.photos.small : img} alt='image'/>

@@ -38,7 +38,7 @@ let setTotalCount = (state, totalCount)=>{
 let initialState = {
     users : [],
     pageSize: 5,
-    totalCountUsers : 0,
+    totalCountUsers : 20,
     currentPage : 1
 };
 

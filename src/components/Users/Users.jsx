@@ -1,5 +1,5 @@
 import React from "react";
-import './Users.module.css';
+import d from './Users.module.css';
 import axios from "axios";
 import img from '../../img/user.png';
 
@@ -8,6 +8,15 @@ class Users extends React.Component {
     componentDidMount() {
 
         let path = `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}`;
+        axios.get(path).then(response => {
+            this.props.setUsers(response.data.items);
+            this.props.setTotalCount(response.data.totalCount);
+        });
+    }
+
+    onPageChanged = (pageNumber) => {
+        this.props.setCurrentPages(pageNumber);
+        let path = `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`;
         axios.get(path).then(response => {
             this.props.setUsers(response.data.items);
             this.props.totalCountUsers = response.data.totalCount;
@@ -21,7 +30,9 @@ class Users extends React.Component {
             pages.push(i);
         };
 
-        let pagesMap = pages.map(s=> <span className={this.props.currentPage == s && 'test'}>{s}</span>)
+        let pagesMap = pages.map(s=> <span
+            className= { this.props.currentPage == s && d.test}
+            onClick={(e)=> this.onPageChanged(s)}>{s}</span>)
         return <div>
             <div>
                 {pagesMap}

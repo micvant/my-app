@@ -4,6 +4,7 @@ const FOLLOW = 'FOLLOW';
 const SET_USERS = 'SET-USERS';
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
 const SET_TOTAL_COUNT = 'SET-TOATAL-COUNT';
+const SET_FETCHING = 'SET-FETCHING'
 
 let changeFollowedUser = (state, userID) => {
     let copyState = {...state, users: state.users.map( u => {
@@ -35,11 +36,17 @@ let setTotalCount = (state, totalCount)=>{
     return copyState;
 }
 
+let setFetching = (state, isFetching) => {
+    let copyState = {...state, isFetching : isFetching}
+    return copyState;
+}
+
 let initialState = {
     users : [],
     pageSize: 5,
     totalCountUsers : 20,
-    currentPage : 1
+    currentPage : 1,
+    isFetching: false
 };
 
 export const usersReducer = (state = initialState, action) =>{
@@ -56,6 +63,8 @@ export const usersReducer = (state = initialState, action) =>{
             return changeCurrentPages(state, action.currentPages);
         case SET_TOTAL_COUNT:
             return setTotalCount(state, action.totalCount);
+        case SET_FETCHING :
+            return setFetching(state, action.isFetching);
         default:
             return state;
     }
@@ -66,3 +75,4 @@ export const unfollowAC = (userID) => ({ type : UNFOLLOW, userID });
 export const setUsersAC = (users) => ({type : SET_USERS, users });
 export const setCurrentPagesAC = (currentPages) => ({type : SET_CURRENT_PAGE, currentPages });
 export const setTotalCountAC = (totalCount) => ({type : SET_TOTAL_COUNT, totalCount});
+export const setFetchingAC = (isFetching) => ({type:SET_FETCHING, isFetching});

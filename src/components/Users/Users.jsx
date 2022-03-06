@@ -13,6 +13,7 @@ let Users = (props) => {
     }
 
     let pagesMap = pages.map(s=> <span
+        key={s}
         className= { props.currentPage === s && d.test}
         onClick={(e)=> props.onPageChanged(s)}>{s}</span>)
 

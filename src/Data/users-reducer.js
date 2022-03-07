@@ -31,12 +31,12 @@ let changeCurrentPages = (state, currentPages) => {
     return copyState;
 }
 
-let setTotalCount = (state, totalCount)=>{
+let changeTotalCount = (state, totalCount)=>{
     let copyState = {...state, totalCountUsers : totalCount}
     return copyState;
 }
 
-let setFetching = (state, isFetching) => {
+let changeFetching = (state, isFetching) => {
     let copyState = {...state, isFetching : isFetching}
     return copyState;
 }
@@ -62,17 +62,17 @@ export const usersReducer = (state = initialState, action) =>{
         case SET_CURRENT_PAGE :
             return changeCurrentPages(state, action.currentPages);
         case SET_TOTAL_COUNT:
-            return setTotalCount(state, action.totalCount);
+            return changeTotalCount(state, action.totalCount);
         case SET_FETCHING :
-            return setFetching(state, action.isFetching);
+            return changeFetching(state, action.isFetching);
         default:
             return state;
     }
 };
 
-export const followAC = (userID) => ({ type : FOLLOW, userID });
-export const unfollowAC = (userID) => ({ type : UNFOLLOW, userID });
-export const setUsersAC = (users) => ({type : SET_USERS, users });
-export const setCurrentPagesAC = (currentPages) => ({type : SET_CURRENT_PAGE, currentPages });
-export const setTotalCountAC = (totalCount) => ({type : SET_TOTAL_COUNT, totalCount});
-export const setFetchingAC = (isFetching) => ({type:SET_FETCHING, isFetching});
+export const follow = (userID) => ({ type : FOLLOW, userID });
+export const unfollow = (userID) => ({ type : UNFOLLOW, userID });
+export const setUsers = (users) => ({type : SET_USERS, users });
+export const setCurrentPages = (currentPages) => ({type : SET_CURRENT_PAGE, currentPages });
+export const setTotalCount = (totalCount) => ({type : SET_TOTAL_COUNT, totalCount});
+export const setFetching = (isFetching) => ({type:SET_FETCHING, isFetching});

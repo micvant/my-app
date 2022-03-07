@@ -29,8 +29,8 @@ let Users = (props) => {
                     <img src={u.photos.small != null ? u.photos.small : img} alt='image'/>
                 </div>
                 <div>
-                    {u.followed ? <button onClick={() => props.changeUnFollowedUser(u.id)}>unfollow</button> :
-                        <button onClick={() => props.changeFollowedUser(u.id)}>follow</button>}
+                    {u.followed ? <button onClick={() => props.unfollow(u.id)}>unfollow</button> :
+                        <button onClick={() => props.follow(u.id)}>follow</button>}
                 </div>
                 </span>
                 <span>

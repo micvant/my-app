@@ -1,11 +1,11 @@
 import img from "../../img/user.png";
 import React from "react";
 import d from "./Users.module.css";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 
 
 let Users = (props) => {
-
+    
     let countUsers = Math.ceil(props.totalCountUsers / props.pageSize);
 
     let pages = [];

@@ -1,6 +1,8 @@
 import img from "../../img/user.png";
 import React from "react";
 import d from "./Users.module.css";
+import {NavLink} from "react-router-dom";
+
 
 let Users = (props) => {
 
@@ -26,7 +28,9 @@ let Users = (props) => {
             props.users.map(u => <div key={u.id}>
                 <span>
                  <div>
-                    <img src={u.photos.small != null ? u.photos.small : img} alt='image'/>
+                     <NavLink to={/profile/ + u.id}>
+                        <img src={u.photos.small != null ? u.photos.small : img} alt='image'/>
+                    </NavLink>
                 </div>
                 <div>
                     {u.followed ? <button onClick={() => props.unfollow(u.id)}>unfollow</button> :

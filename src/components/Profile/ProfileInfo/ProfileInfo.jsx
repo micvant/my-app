@@ -1,10 +1,14 @@
 import p from './ProfileInfo.module.css'
+import Preloader from "../../Preloader/Preloader";
 
-function ProfileInfo(){
+function ProfileInfo(props){
+    if(!props.profile){
+        return <Preloader/>
+    }
     return (
     <div>
         <div className={p.content}>
-            <img src='https://klike.net/uploads/posts/2019-05/1556708032_1.jpg' alt='img'></img>
+            <img src={props.profile.photos.small} alt='img'></img>
         </div>
         <div className={p.text}>
             ava + deskription

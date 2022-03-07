@@ -1,7 +1,8 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_TEXT_POST = 'UPDATE-TEXT-POST';
+const SET_USERS_PROFILE = 'SET-USERS-PROFILE';
 
-let addPost = (state) => {
+let addPostLocal = (state) => {
 
     let count = state.length;
     let text = state.newPostText;
@@ -13,7 +14,12 @@ let addPost = (state) => {
     };
 };
 
-let updatePostText = (state, action) => {
+let setUsersProfileLocal = (state, profile) => {
+    let copyState = {...state, profile};
+    return copyState;
+};
+
+let updateNewPostTextLocal = (state, action) => {
 
     return {...state,
         newPostText : action.newText};
@@ -39,16 +45,19 @@ let initialState = {
         {id: 4,
             value: "Gena",
             img: ""}
-    ]
+    ],
+    profile: null
 };
 
 export const profileReducer = (state= initialState, action) => {
 
     switch (action.type){
         case ADD_POST:
-            return addPost(state);
+            return addPostLocal(state);
         case UPDATE_TEXT_POST:
-            return updatePostText(state, action);
+            return updateNewPostTextLocal(state, action);
+        case SET_USERS_PROFILE:
+            return setUsersProfileLocal(state, action.profile);
         default :
             return state;
 
@@ -56,6 +65,6 @@ export const profileReducer = (state= initialState, action) => {
 
 };
 
-export const addPostActionCreator = () => ({type : ADD_POST});
-
+export const addPost = () => ({type : ADD_POST});
 export const updateNewPostText = (newText) => ({type : UPDATE_TEXT_POST, newText : newText});
+export const setUsersProfile = (profile) => ({type : SET_USERS_PROFILE, profile});

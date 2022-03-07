@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import MainContent from "./components/MainContent/MainContent";
 import UsersContainer from "./components/Users/UsersContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 function App(props) {
   return (
@@ -21,7 +22,7 @@ function App(props) {
                         <Route path="/main_content/*"
                                element={<MainContent />}/>
                         <Route path="/profile/*"
-                               element={<Profile store={props.store} />}/>
+                               element={<ProfileContainer store={props.store} />}/>
                        <Route path='/users/*'
                            element={<UsersContainer/>} />
                     </Routes>

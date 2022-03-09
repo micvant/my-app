@@ -8,7 +8,7 @@ const SET_FETCHING = 'SET-FETCHING'
 
 let changeFollowedUser = (state, userID) => {
     let copyState = {...state, users: state.users.map( u => {
-            if(u.id == userID){
+            if(u.id === userID){
                 return {...u, followed : true}
             }
             return u;
@@ -18,7 +18,7 @@ let changeFollowedUser = (state, userID) => {
 
 let changeUnFollowedUser = (state, userID) => {
     let copyState = {...state, users: state.users.map( u => {
-            if(u.id == userID){
+            if(u.id === userID){
                 return {...u, followed : false}
             }
             return u;

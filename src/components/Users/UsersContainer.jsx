@@ -8,18 +8,17 @@ import {
     setUsers,
     unfollow
 } from '../../Data/users-reducer';
-import axios from "axios";
 import Users from "./Users";
 import Preloader from "../Preloader/Preloader";
+import {getUsers} from "../../API/API";
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
         this.props.setFetching(true);
-        let path = `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}`;
-        axios.get(path, {withCredentials : true}).then(response => {
-            this.props.setUsers(response.data.items);
-            this.props.setTotalCount(response.data.totalCount);
+       getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+            this.props.setUsers(data.items);
+            this.props.setTotalCount(data.totalCount);
             this.props.setFetching(false);
         });
     }
@@ -27,10 +26,9 @@ class UsersContainer extends React.Component {
     onPageChanged = (pageNumber) => {
         this.props.setFetching(true);
         this.props.setCurrentPages(pageNumber);
-        let path = `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`;
-        axios.get(path, {withCredentials : true}).then(response => {
-            this.props.setUsers(response.data.items);
-            this.props.setTotalCount( response.data.totalCount);
+        getUsers(pageNumber, this.props.pageSize).then(data => {
+            this.props.setUsers(data.items);
+            this.props.setTotalCount( data.totalCount);
             this.props.setFetching(false);
         });
     }

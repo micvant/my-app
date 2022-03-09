@@ -8,12 +8,13 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import MainContent from "./components/MainContent/MainContent";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
+import HeaderConteiner from "./components/Header/HeaderConteiner";
 
 function App(props) {
   return (
       <BrowserRouter>
             <div className='app-wrapper'>
-                <Header/>
+                <HeaderConteiner/>
                 <Nav/>
                 <div className='app-wrapper-content'>
                     <Routes >

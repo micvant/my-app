@@ -3,6 +3,7 @@ import React from "react";
 import d from "./Users.module.css";
 import {NavLink} from "react-router-dom";
 import {follow, unFollow} from "../../API/API";
+import {setFetchingsUsers} from "../../Data/users-reducer";
 
 let Users = (props) => {
     
@@ -29,22 +30,27 @@ let Users = (props) => {
                 <span>
                  <div>
                      <NavLink to={/profile/ + u.id}>
-                        <img className={d.avatar} src={u.photos.small != null ? u.photos.small : img} alt='images'/>
+                        <img  className={d.avatar} src={u.photos.small != null ? u.photos.small : img} alt='images'/>
                     </NavLink>
                 </div>
                 <div>
-                      {u.followed ? <button onClick={() => {
-                              unFollow(u.id).then(data => {
+                      {u.followed ? <button disabled={props.fetchingUsers.some(id => id === u.id)} onClick={() => {
+                              props.setFetchingsUsers(true, u.id);
+                                unFollow(u.id).then(data => {
                                   if(data.resultCode === 0){
                                       props.unfollow(u.id);
                                   }
+                                    props.setFetchingsUsers(false, u.id);
                               })
                           }}>unfollow</button> :
-                          <button onClick={() => {
+                          <button disabled={props.fetchingUsers.some(id => id === u.id)}onClick={() => {
+
+                              props.setFetchingsUsers(true, u.id);
                               follow(u.id).then(data => {
                                   if(data.resultCode === 0){
                                       props.follow(u.id);
                                   }
+                                  props.setFetchingsUsers(false, u.id);
                               })
                           }
                           }>follow</button>}

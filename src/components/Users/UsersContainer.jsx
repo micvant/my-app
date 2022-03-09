@@ -17,7 +17,7 @@ class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.setFetching(true);
         let path = `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}`;
-        axios.get(path).then(response => {
+        axios.get(path, {withCredentials : true}).then(response => {
             this.props.setUsers(response.data.items);
             this.props.setTotalCount(response.data.totalCount);
             this.props.setFetching(false);
@@ -28,7 +28,7 @@ class UsersContainer extends React.Component {
         this.props.setFetching(true);
         this.props.setCurrentPages(pageNumber);
         let path = `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`;
-        axios.get(path).then(response => {
+        axios.get(path, {withCredentials : true}).then(response => {
             this.props.setUsers(response.data.items);
             this.props.setTotalCount( response.data.totalCount);
             this.props.setFetching(false);
@@ -40,8 +40,8 @@ class UsersContainer extends React.Component {
             <Preloader isFetching={this.props.isFetching} />
             <Users
             users={this.props.users}
-            changeFollowedUser={this.props.changeFollowedUser}
-            changeUnFollowedUser={this.props.changeUnFollowedUser}
+            follow={this.props.follow}
+            unfollow={this.props.unfollow}
             onPageChanged={this.onPageChanged}
             currentPage={this.props.currentPage}
             pageSize={this.props.pageSize}

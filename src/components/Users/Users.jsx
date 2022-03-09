@@ -1,8 +1,8 @@
 import img from "../../img/user.png";
 import React from "react";
 import d from "./Users.module.css";
-import {NavLink, useNavigate} from "react-router-dom";
-
+import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 let Users = (props) => {
     
@@ -33,8 +33,22 @@ let Users = (props) => {
                     </NavLink>
                 </div>
                 <div>
-                    {u.followed ? <button onClick={() => props.unfollow(u.id)}>unfollow</button> :
-                        <button onClick={() => props.follow(u.id)}>follow</button>}
+                      {u.followed ? <button onClick={() => {
+                              let path = `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`;
+                              axios.delete(path, {withCredentials : true, headers : {"API-KEY" : "2a002c6d-6f0a-4332-a99c-a9da24817eaa"}}).then(response => {
+                                  if(response.data.resultCode === 0){
+                                      props.unfollow(u.id);
+                                  }
+                              })
+                          }}>unfollow</button> :
+                          <button onClick={() => {
+                              axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {withCredentials : true, headers : {"API-KEY" : "2a002c6d-6f0a-4332-a99c-a9da24817eaa"}}).then(response => {
+                                  if(response.data.resultCode === 0){
+                                      props.follow(u.id);
+                                  }
+                              })
+                          }
+                          }>follow</button>}
                 </div>
                 </span>
                 <span>

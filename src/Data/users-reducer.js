@@ -1,3 +1,4 @@
+import {getUsers} from "../API/API";
 
 const UNFOLLOW = 'UNFOLLOW';
 const FOLLOW = 'FOLLOW';
@@ -90,3 +91,13 @@ export const setCurrentPages = (currentPages) => ({type : SET_CURRENT_PAGE, curr
 export const setTotalCount = (totalCount) => ({type : SET_TOTAL_COUNT, totalCount});
 export const setFetching = (isFetching) => ({type:SET_FETCHING, isFetching});
 export const setFetchingsUsers = (isFetching, id) => ({type:SET_FETCHINGS_USERS, isFetching, id});
+
+export const getUsersThunk = (dispatch) => {
+    dispatch(setFetching(true));
+    getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+        setFetching(false);
+        this.props.setUsers(data.items);
+        this.props.setTotalCount(data.totalCount);
+
+    });
+}

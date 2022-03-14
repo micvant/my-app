@@ -1,4 +1,4 @@
-import {getUsers, setUnFollowAPI, setFollowAPI} from "../API/API";
+import {getUsersAPI, setUnFollowAPI, setFollowAPI} from "../API/API";
 
 const UNFOLLOW = 'UNFOLLOW';
 const FOLLOW = 'FOLLOW';
@@ -44,7 +44,6 @@ let changeFetching = (state, isFetching) => {
 }
 
 let changeFetchingsUsers = (state, action) => {
-    debugger
     let copyState = {...state,
         fetchingUsers : action.isFetching ? [...state.fetchingUsers, action.id]
             : state.fetchingUsers.filter(id => id !== action.id)
@@ -92,11 +91,11 @@ export const setTotalCount = (totalCount) => ({type : SET_TOTAL_COUNT, totalCoun
 export const setFetching = (isFetching) => ({type:SET_FETCHING, isFetching});
 export const setFetchingsUsers = (isFetching, id) => ({type:SET_FETCHINGS_USERS, isFetching, id});
 
-export const getUsersThunkCreator = (currentPage, pageSize) => {
+export const getUsersThunk = (currentPage, pageSize) => {
     return (dispatch) => {
         dispatch(setFetching(true));
         dispatch(setCurrentPages(currentPage))
-        getUsers(currentPage, pageSize).then(data => {
+        getUsersAPI(currentPage, pageSize).then(data => {
             dispatch(setFetching(false));
             dispatch(setUsers(data.items));
             dispatch(setTotalCount(data.totalCount));
@@ -104,7 +103,7 @@ export const getUsersThunkCreator = (currentPage, pageSize) => {
     }
 }
 
-export const setFollow = (id) => {
+export const setFollowThunk = (id) => {
     return (dispatch) => {
         dispatch(setFetchingsUsers(true, id));
         setFollowAPI(id).then(data => {
@@ -115,7 +114,8 @@ export const setFollow = (id) => {
         })
     }
 }
-export const setUnFollow = (id) => {
+
+export const setUnFollowThunk = (id) => {
     return (dispatch)=> {
         dispatch(setFetchingsUsers(true, id));
         setUnFollowAPI(id).then(data => {

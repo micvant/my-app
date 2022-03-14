@@ -46,7 +46,7 @@ let changeFetching = (state, isFetching) => {
 let changeFetchingsUsers = (state, action) => {
     debugger
     let copyState = {...state,
-        fetchingUsers : action.isFetching ? [... state.fetchingUsers, action.id]
+        fetchingUsers : action.isFetching ? [...state.fetchingUsers, action.id]
             : state.fetchingUsers.filter(id => id !== action.id)
     }
 
@@ -94,7 +94,6 @@ export const setFetchingsUsers = (isFetching, id) => ({type:SET_FETCHINGS_USERS,
 
 export const getUsersThunkCreator = (currentPage, pageSize) => {
     return (dispatch) => {
-        debugger
         dispatch(setFetching(true));
         dispatch(setCurrentPages(currentPage))
         getUsers(currentPage, pageSize).then(data => {
@@ -107,7 +106,6 @@ export const getUsersThunkCreator = (currentPage, pageSize) => {
 
 export const setFollow = (id) => {
     return (dispatch) => {
-
         dispatch(setFetchingsUsers(true, id));
         setFollowAPI(id).then(data => {
             if (data.resultCode === 0) {
@@ -118,7 +116,6 @@ export const setFollow = (id) => {
     }
 }
 export const setUnFollow = (id) => {
-
     return (dispatch)=> {
         dispatch(setFetchingsUsers(true, id));
         setUnFollowAPI(id).then(data => {

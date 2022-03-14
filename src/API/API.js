@@ -1,3 +1,4 @@
+
 import axios from "axios";
 
 const usersAPI = axios.create({
@@ -9,6 +10,11 @@ const usersAPI = axios.create({
 export const getUsers = (pageNumber = 2, pageSize = 10) =>{
     let path = `users?page=${pageNumber}&count=${pageSize}`;
     return usersAPI.get(path).then(response => response.data);
+}
+
+export const getProfile = (userId) => {
+    let path = `https://social-network.samuraijs.com/api/1.0/profile/${userId}`;
+   return axios.get(path).then((respone => respone.data));
 }
 
 export const authMe = () => {

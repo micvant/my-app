@@ -9,43 +9,48 @@ const SET_FETCHING = 'SET-FETCHING';
 const SET_FETCHINGS_USERS = 'SET-FETCHINGS-USERS';
 
 let changeFollowedUser = (state, userID) => {
-    let copyState = {...state, users: state.users.map( u => {
-            if(u.id === userID){
-                return {...u, followed : true}
+    let copyState = {
+        ...state, users: state.users.map(u => {
+            if (u.id === userID) {
+                return {...u, followed: true}
             }
             return u;
-        })};
+        })
+    };
     return copyState;
 };
 
 let changeUnFollowedUser = (state, userID) => {
-    let copyState = {...state, users: state.users.map( u => {
-            if(u.id === userID){
-                return {...u, followed : false}
+    let copyState = {
+        ...state, users: state.users.map(u => {
+            if (u.id === userID) {
+                return {...u, followed: false}
             }
             return u;
-        })};
+        })
+    };
     return copyState;
 };
 
 let changeCurrentPages = (state, currentPages) => {
-    let copyState = {...state, currentPage : currentPages};
+    let copyState = {...state, currentPage: currentPages};
     return copyState;
 }
 
-let changeTotalCount = (state, totalCount)=>{
-    let copyState = {...state, totalCountUsers : totalCount}
+let changeTotalCount = (state, totalCount) => {
+    let copyState = {...state, totalCountUsers: totalCount}
     return copyState;
 }
 
 let changeFetching = (state, isFetching) => {
-    let copyState = {...state, isFetching : isFetching}
+    let copyState = {...state, isFetching: isFetching}
     return copyState;
 }
 
 let changeFetchingsUsers = (state, action) => {
-    let copyState = {...state,
-        fetchingUsers : action.isFetching ? [...state.fetchingUsers, action.id]
+    let copyState = {
+        ...state,
+        fetchingUsers: action.isFetching ? [...state.fetchingUsers, action.id]
             : state.fetchingUsers.filter(id => id !== action.id)
     }
 
@@ -53,19 +58,19 @@ let changeFetchingsUsers = (state, action) => {
 }
 
 let initialState = {
-    users : [],
+    users: [],
     pageSize: 5,
-    totalCountUsers : 20,
-    currentPage : 1,
+    totalCountUsers: 20,
+    currentPage: 1,
     isFetching: false,
-    fetchingUsers : []
+    fetchingUsers: []
 };
 
-export const usersReducer = (state = initialState, action) =>{
+export const usersReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case SET_USERS:
-            return {...state, users: [ ...action.users ]};
+            return {...state, users: [...action.users]};
         case FOLLOW:
             return changeFollowedUser(state, action.userID);
         case UNFOLLOW:
@@ -83,13 +88,13 @@ export const usersReducer = (state = initialState, action) =>{
     }
 };
 
-export const follow = (userID) => ({ type : FOLLOW, userID });
-export const unfollow = (userID) => ({ type : UNFOLLOW, userID });
-export const setUsers = (users) => ({type : SET_USERS, users });
-export const setCurrentPages = (currentPages) => ({type : SET_CURRENT_PAGE, currentPages });
-export const setTotalCount = (totalCount) => ({type : SET_TOTAL_COUNT, totalCount});
-export const setFetching = (isFetching) => ({type:SET_FETCHING, isFetching});
-export const setFetchingsUsers = (isFetching, id) => ({type:SET_FETCHINGS_USERS, isFetching, id});
+export const follow = (userID) => ({type: FOLLOW, userID});
+export const unfollow = (userID) => ({type: UNFOLLOW, userID});
+export const setUsers = (users) => ({type: SET_USERS, users});
+export const setCurrentPages = (currentPages) => ({type: SET_CURRENT_PAGE, currentPages});
+export const setTotalCount = (totalCount) => ({type: SET_TOTAL_COUNT, totalCount});
+export const setFetching = (isFetching) => ({type: SET_FETCHING, isFetching});
+export const setFetchingsUsers = (isFetching, id) => ({type: SET_FETCHINGS_USERS, isFetching, id});
 
 export const getUsersThunk = (currentPage, pageSize) => {
     return (dispatch) => {
@@ -116,7 +121,7 @@ export const setFollowThunk = (id) => {
 }
 
 export const setUnFollowThunk = (id) => {
-    return (dispatch)=> {
+    return (dispatch) => {
         dispatch(setFetchingsUsers(true, id));
         setUnFollowAPI(id).then(data => {
             if (data.resultCode === 0) {

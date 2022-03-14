@@ -2,15 +2,15 @@ import p from './MyPosts.module.css'
 import Post from './Post/Post'
 import React from 'react';
 
-function MyPosts(props){
+function MyPosts(props) {
 
     let arrayPosts = props.posts.map(post => <Post key={post.id} messages={post.value} img={post.img}/>);
 
-    let onAddPost = () =>{
+    let onAddPost = () => {
         props.addPost();
     }
 
-    let onPostChange = (e) =>{
+    let onPostChange = (e) => {
         let text = e.target.value;
         props.updateNewPostText(text);
     }

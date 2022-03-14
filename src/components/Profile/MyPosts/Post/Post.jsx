@@ -1,9 +1,9 @@
 import p from './Post.module.css'
 
-function Post(props){
+function Post(props) {
     return (
         <div className={p.post}>
-            <img src={props.img} alt="avatar" />
+            <img src={props.img} alt="avatar"/>
             {props.messages}
         </div>
     );

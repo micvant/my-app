@@ -7,17 +7,14 @@ import {useMatch} from "react-router";
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
-
         let userId = this.props.match ? this.props.match.params.userId : '2';
-
         this.props.getProfileThunk(userId);
     }
 
     render() {
-
         return <>
             <Profile {...this.props} profile={this.props.profile}/>
-            </>
+        </>
     }
 
 }
@@ -29,8 +26,7 @@ const ProfileMatch = (props) => {
     )
 }
 let mapStateToProps = (state) => ({
-    profile : state.profilePage.profile
+    profile: state.profilePage.profile
 });
-export default connect(mapStateToProps, {  setUsersProfile, getProfileThunk })(ProfileMatch );
 
-//export default connect(mapStateToProps,{setUsersProfile})(ProfileContainer);
+export default connect(mapStateToProps, {setUsersProfile, getProfileThunk})(ProfileMatch);

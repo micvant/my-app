@@ -19,37 +19,38 @@ class UsersContainer extends React.Component {
 
     render() {
         return <>
-            <Preloader isFetching={this.props.isFetching} />
+            <Preloader isFetching={this.props.isFetching}/>
             <Users
-            users={this.props.users}
-            follow={this.props.follow}
-            unfollow={this.props.unfollow}
-            onPageChanged={this.onPageChanged}
-            currentPage={this.props.currentPage}
-            pageSize={this.props.pageSize}
-            totalCountUsers={this.props.totalCountUsers}
-            fetchingUsers = {this.props.fetchingUsers}
-            setFetchingsUsers ={this.props.setFetchingsUsers}
-            setFollow = {this.props.setFollowThunk}
-            setUnFollow = {this.props.setUnFollowThunk}
-        />
+                users={this.props.users}
+                follow={this.props.follow}
+                unfollow={this.props.unfollow}
+                onPageChanged={this.onPageChanged}
+                currentPage={this.props.currentPage}
+                pageSize={this.props.pageSize}
+                totalCountUsers={this.props.totalCountUsers}
+                fetchingUsers={this.props.fetchingUsers}
+                setFetchingsUsers={this.props.setFetchingsUsers}
+                setFollow={this.props.setFollowThunk}
+                setUnFollow={this.props.setUnFollowThunk}
+            />
         </>;
     }
 }
 
-let  mapStateToProps = (state) => {
+let mapStateToProps = (state) => {
     return {
-        users : state.usersPage.users,
-        pageSize : state.usersPage.pageSize,
+        users: state.usersPage.users,
+        pageSize: state.usersPage.pageSize,
         totalCountUsers: state.usersPage.totalCountUsers,
-        currentPage : state.usersPage.currentPage,
+        currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
-        fetchingUsers : state.usersPage.fetchingUsers,
+        fetchingUsers: state.usersPage.fetchingUsers,
     };
 };
 
 
 export default connect(mapStateToProps,
     {
-        setFetchingsUsers , getUsersThunk, setFollowThunk, setUnFollowThunk}
-    )(UsersContainer);
+        setFetchingsUsers, getUsersThunk, setFollowThunk, setUnFollowThunk
+    }
+)(UsersContainer);

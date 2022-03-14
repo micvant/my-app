@@ -1,20 +1,19 @@
-
 import axios from "axios";
 
 const usersAPI = axios.create({
-    baseURL : 'https://social-network.samuraijs.com/api/1.0/',
-    withCredentials : true,
-    headers : {"API-KEY" : "2a002c6d-6f0a-4332-a99c-a9da24817eaa"}
+    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
+    withCredentials: true,
+    headers: {"API-KEY": "2a002c6d-6f0a-4332-a99c-a9da24817eaa"}
 });
 
-export const getUsersAPI = (pageNumber = 2, pageSize = 10) =>{
+export const getUsersAPI = (pageNumber = 2, pageSize = 10) => {
     let path = `users?page=${pageNumber}&count=${pageSize}`;
     return usersAPI.get(path).then(response => response.data);
 }
 
 export const getProfileAPI = (userId) => {
     let path = `https://social-network.samuraijs.com/api/1.0/profile/${userId}`;
-   return axios.get(path).then((respone => respone.data));
+    return axios.get(path).then((respone => respone.data));
 }
 
 export const authMeAPI = () => {

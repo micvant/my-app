@@ -16,12 +16,12 @@ export const authMe = () => {
     return usersAPI.get(path).then(response => response.data);
 }
 
-export const follow = (id) => {
+export const setFollowAPI = (id) => {
     let path = `follow/${id}`;
     return usersAPI.post(path, {}).then(response => response.data);
 }
 
-export const unFollow = (id) => {
+export const setUnFollowAPI = (id) => {
     let path = `follow/${id}`;
     return usersAPI.delete(path).then(response => response.data);
 }

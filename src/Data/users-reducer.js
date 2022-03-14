@@ -1,4 +1,4 @@
-import {getUsers} from "../API/API";
+import {getUsers, setUnFollowAPI, setFollowAPI} from "../API/API";
 
 const UNFOLLOW = 'UNFOLLOW';
 const FOLLOW = 'FOLLOW';
@@ -92,12 +92,40 @@ export const setTotalCount = (totalCount) => ({type : SET_TOTAL_COUNT, totalCoun
 export const setFetching = (isFetching) => ({type:SET_FETCHING, isFetching});
 export const setFetchingsUsers = (isFetching, id) => ({type:SET_FETCHINGS_USERS, isFetching, id});
 
-export const getUsersThunk = (dispatch) => {
-    dispatch(setFetching(true));
-    getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-        setFetching(false);
-        this.props.setUsers(data.items);
-        this.props.setTotalCount(data.totalCount);
+export const getUsersThunkCreator = (currentPage, pageSize) => {
+    return (dispatch) => {
+        debugger
+        dispatch(setFetching(true));
+        dispatch(setCurrentPages(currentPage))
+        getUsers(currentPage, pageSize).then(data => {
+            dispatch(setFetching(false));
+            dispatch(setUsers(data.items));
+            dispatch(setTotalCount(data.totalCount));
+        });
+    }
+}
 
-    });
+export const setFollow = (id) => {
+    return (dispatch) => {
+
+        dispatch(setFetchingsUsers(true, id));
+        setFollowAPI(id).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(follow(id));
+            }
+            dispatch(setFetchingsUsers(false, id));
+        })
+    }
+}
+export const setUnFollow = (id) => {
+
+    return (dispatch)=> {
+        dispatch(setFetchingsUsers(true, id));
+        setUnFollowAPI(id).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(unfollow(id));
+            }
+            dispatch(setFetchingsUsers(false, id));
+        })
+    }
 }

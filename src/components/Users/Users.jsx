@@ -2,8 +2,7 @@ import img from "../../img/user.png";
 import React from "react";
 import d from "./Users.module.css";
 import {NavLink} from "react-router-dom";
-import {follow, unFollow} from "../../API/API";
-import {setFetchingsUsers} from "../../Data/users-reducer";
+
 
 let Users = (props) => {
     
@@ -17,7 +16,7 @@ let Users = (props) => {
 
     let pagesMap = pages.map(s=> <span
         key={s}
-        className= { props.currentPage === s && d.test}
+        className= {  props.currentPage === s ? d.test : ''}
         onClick={(e)=> props.onPageChanged(s)}>{s}</span>)
 
     return (
@@ -35,23 +34,10 @@ let Users = (props) => {
                 </div>
                 <div>
                       {u.followed ? <button disabled={props.fetchingUsers.some(id => id === u.id)} onClick={() => {
-                              props.setFetchingsUsers(true, u.id);
-                                unFollow(u.id).then(data => {
-                                  if(data.resultCode === 0){
-                                      props.unfollow(u.id);
-                                  }
-                                    props.setFetchingsUsers(false, u.id);
-                              })
+                          props.setUnFollow(u.id)
                           }}>unfollow</button> :
                           <button disabled={props.fetchingUsers.some(id => id === u.id)}onClick={() => {
-
-                              props.setFetchingsUsers(true, u.id);
-                              follow(u.id).then(data => {
-                                  if(data.resultCode === 0){
-                                      props.follow(u.id);
-                                  }
-                                  props.setFetchingsUsers(false, u.id);
-                              })
+                              props.setFollow(u.id)
                           }
                           }>follow</button>}
                 </div>

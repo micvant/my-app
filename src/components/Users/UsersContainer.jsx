@@ -1,36 +1,21 @@
 import React from "react";
 import {connect} from "react-redux";
 import {
-    follow,
-    setCurrentPages,
-    setFetching, setFetchingsUsers,
-    setTotalCount,
-    setUsers,
-    unfollow
+    getUsersThunkCreator,
+    setFetchingsUsers, setFollow, setUnFollow,
 } from '../../Data/users-reducer';
 import Users from "./Users";
 import Preloader from "../Preloader/Preloader";
-import {getUsers} from "../../API/API";
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        this.props.setFetching(true);
-       getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-            this.props.setUsers(data.items);
-            this.props.setTotalCount(data.totalCount);
-            this.props.setFetching(false);
-        });
+        this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize);
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.setFetching(true);
-        this.props.setCurrentPages(pageNumber);
-        getUsers(pageNumber, this.props.pageSize).then(data => {
-            this.props.setUsers(data.items);
-            this.props.setTotalCount( data.totalCount);
-            this.props.setFetching(false);
-        });
+        debugger
+        this.props.getUsersThunkCreator(pageNumber, this.props.pageSize);
     }
 
     render() {
@@ -46,6 +31,8 @@ class UsersContainer extends React.Component {
             totalCountUsers={this.props.totalCountUsers}
             fetchingUsers = {this.props.fetchingUsers}
             setFetchingsUsers ={this.props.setFetchingsUsers}
+            setFollow = {this.props.setFollow}
+            setUnFollow = {this.props.setUnFollow}
         />
         </>;
     }
@@ -64,5 +51,6 @@ let  mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps,
-    {follow, unfollow, setUsers, setCurrentPages, setTotalCount, setFetching, setFetchingsUsers}
+    {
+        setFetchingsUsers , getUsersThunkCreator, setFollow, setUnFollow}
     )(UsersContainer);

@@ -1,6 +1,7 @@
 import p from './ProfileInfo.module.css'
 import Preloader from "../../Preloader/Preloader";
 import bgr from '../../../img/background.jpg';
+import ProfileStatus from "../Status/ProfileStatus";
 
 function ProfileInfo(props) {
     if (!props.profile) {
@@ -17,7 +18,8 @@ function ProfileInfo(props) {
                 <img className={p.avatar}
                      src={props.profile.photos.small}
                      alt='img-photos'></img>
-                <span>Описание</span>
+                <ProfileStatus
+                status={props.status}/>
             </div>
         </div>
     );

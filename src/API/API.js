@@ -30,3 +30,8 @@ export const setUnFollowAPI = (id) => {
     let path = `follow/${id}`;
     return usersAPI.delete(path).then(response => response.data);
 }
+
+export const getStatusAPI = (id) => {
+    let path = `profile/status/${id}`;
+    return usersAPI.get(path).then(response => response.data);
+}

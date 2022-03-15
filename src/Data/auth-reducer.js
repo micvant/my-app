@@ -27,9 +27,7 @@ export const setUserData = (login, email, id) => ({type: SET_USER_DATA, data: {l
 
 export const authMeThunk = () => {
     return (dispatch) => {
-
         authMeAPI().then((data) => {
-            debugger
                 if (data.resultCode === 0) {
                     let {login, email, id} = {...data.data};
                     dispatch(setUserData(login, email, id));

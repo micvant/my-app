@@ -1,8 +1,9 @@
-import {getProfileAPI} from "../API/API";
+import {getProfileAPI, getStatusAPI} from "../API/API";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_TEXT_POST = 'UPDATE-TEXT-POST';
 const SET_USERS_PROFILE = 'SET-USERS-PROFILE';
+const SET_STATUS_USER = 'SET_STATUS_USER';
 
 let addPostLocal = (state) => {
 
@@ -29,6 +30,10 @@ let updateNewPostTextLocal = (state, action) => {
         newPostText: action.newText
     };
 };
+
+let setStatusUserLocal = (state, status) =>{
+    return {...state, status};
+}
 
 let initialState = {
     newPostText: '',
@@ -59,7 +64,8 @@ let initialState = {
             img: ""
         }
     ],
-    profile: null
+    profile: null,
+    status : ''
 };
 
 export const profileReducer = (state = initialState, action) => {
@@ -71,6 +77,8 @@ export const profileReducer = (state = initialState, action) => {
             return updateNewPostTextLocal(state, action);
         case SET_USERS_PROFILE:
             return setUsersProfileLocal(state, action.profile);
+        case SET_STATUS_USER:
+            return setStatusUserLocal(state, action.status);
         default :
             return state;
 
@@ -82,11 +90,19 @@ export const profileReducer = (state = initialState, action) => {
 export const addPost = () => ({type: ADD_POST});
 export const updateNewPostText = (newText) => ({type: UPDATE_TEXT_POST, newText: newText});
 export const setUsersProfile = (profile) => ({type: SET_USERS_PROFILE, profile});
+export const setUserStatus = (status) => ({type: SET_STATUS_USER, status});
 
 export const getProfileThunk = (userId) => {
     return (dispatch) => {
         getProfileAPI(userId).then((data) => {
             dispatch(setUsersProfile(data));
+        })
+    }
+}
+export const getStatusThunk = (userId) => {
+    return (dispatch) => {
+        getStatusAPI(userId).then(data=>{
+            dispatch(setUserStatus(data));
         })
     }
 }

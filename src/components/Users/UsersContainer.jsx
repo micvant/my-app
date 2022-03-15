@@ -6,6 +6,8 @@ import {
 } from '../../Data/users-reducer';
 import Users from "./Users";
 import Preloader from "../Preloader/Preloader";
+import {compose} from "redux";
+import {WithAuthNavigate} from "../../hoc/WithAuthNavigate";
 
 class UsersContainer extends React.Component {
 
@@ -48,9 +50,11 @@ let mapStateToProps = (state) => {
     };
 };
 
-
-export default connect(mapStateToProps,
-    {
-        setFetchingsUsers, getUsersThunk, setFollowThunk, setUnFollowThunk
-    }
+export default compose(
+    connect(mapStateToProps,
+        {
+            setFetchingsUsers, getUsersThunk, setFollowThunk, setUnFollowThunk
+        }
+    ),
+    WithAuthNavigate
 )(UsersContainer);

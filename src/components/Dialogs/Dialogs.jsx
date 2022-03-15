@@ -2,6 +2,7 @@ import React from 'react'
 import d from './Dialogs.module.css'
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
+import {Navigate} from 'react-router-dom';
 
 function Dialogs(props) {
 
@@ -19,6 +20,12 @@ function Dialogs(props) {
     // Преобразуем массивы с данными в верстку
     let arrayDialogs = dialogsPage.dialogs.map(el => <Dialog key={el.id} name={el.name} id={el.id}/>);
     let arrayMessages = dialogsPage.messages.map(el => <Message key={el.id} value={el.value}/>);
+
+    if(props.isAuth === false ){
+       return (
+          <Navigate to={'/login/*'}/>
+       )
+    }
 
     return (
         <div className={d.dialogs}>

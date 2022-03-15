@@ -13,6 +13,9 @@ function Nav() {
             <div className={n.item}>
                 <NavLink to="/users">Users</NavLink>
             </div>
+            <div className={n.item}>
+                <NavLink to="/login">Login</NavLink>
+            </div>
         </nav>
     );
 }

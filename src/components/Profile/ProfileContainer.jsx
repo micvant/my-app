@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {getProfileThunk, setUsersProfile, getStatusThunk} from "../../Data/profile-reducer";
@@ -6,25 +6,26 @@ import {useMatch} from "react-router";
 import {WithAuthNavigate} from "../../hoc/WithAuthNavigate";
 import {compose} from "redux";
 
-class ProfileContainer extends React.Component {
+let ProfileContainerHook = (props) => {
 
-    componentDidMount() {
-        let userId = this.props.match ? this.props.match.params.userId : '2';
-        this.props.getProfileThunk(userId);
-        this.props.getStatusThunk(userId);
-    }
+    useEffect(()=>{
+        let userId = props.match ? props.match.params.userId : '22692';
+        props.getProfileThunk(userId);
+        props.getStatusThunk(userId);
+    });
 
-    render() {
-        return <>
-            <Profile {...this.props} status={this.props.status} profile={this.props.profile}/>
+    return (
+        <>
+            <Profile {...props} status={props.status} profile={props.profile}/>
         </>
-    }
+    )
 }
 
 const ProfileMatch = (props) => {
     let match = useMatch("/profile/:userId/");
     return (
-        <ProfileContainer {...props} match={match} getProfileThunk={props.getProfileThunk} getStatusThunk={props.getStatusThunk}/>
+        <ProfileContainerHook {...props} match={match} getProfileThunk={props.getProfileThunk} getStatusThunk={props.getStatusThunk}/>
+       // <ProfileContainer {...props} match={match} getProfileThunk={props.getProfileThunk} getStatusThunk={props.getStatusThunk}/>
     )
 }
 

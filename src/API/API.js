@@ -6,7 +6,7 @@ const usersAPI = axios.create({
     headers: {"API-KEY": "2a002c6d-6f0a-4332-a99c-a9da24817eaa"}
 });
 
-export const getUsersAPI = (pageNumber = 2, pageSize = 10) => {
+export const getUsersAPI = (pageNumber = 22692, pageSize = 10) => {
     let path = `users?page=${pageNumber}&count=${pageSize}`;
     return usersAPI.get(path).then(response => response.data);
 }

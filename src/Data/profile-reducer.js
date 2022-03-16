@@ -1,4 +1,4 @@
-import {getProfileAPI, getStatusAPI} from "../API/API";
+import {getProfileAPI, getStatusAPI, setStatusAPI} from "../API/API";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_TEXT_POST = 'UPDATE-TEXT-POST';
@@ -103,6 +103,15 @@ export const getStatusThunk = (userId) => {
     return (dispatch) => {
         getStatusAPI(userId).then(data=>{
             dispatch(setUserStatus(data));
+        })
+    }
+}
+export const setStatusThunk = (status) => {
+    return (dispatch) => {
+        setStatusAPI(status).then(data => {
+        if(data.resultCode === 1){
+            dispatch()
+        }
         })
     }
 }

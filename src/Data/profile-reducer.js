@@ -109,8 +109,8 @@ export const getStatusThunk = (userId) => {
 export const setStatusThunk = (status) => {
     return (dispatch) => {
         setStatusAPI(status).then(data => {
-        if(data.resultCode === 1){
-            dispatch()
+        if(data.resultCode === 0){
+           dispatch(setUserStatus(status));
         }
         })
     }

@@ -38,5 +38,5 @@ export const getStatusAPI = (id) => {
 
 export const setStatusAPI =(status)=> {
     let path = '/profile/status/';
-    return usersAPI.put(path).then(response => response.data);
+    return usersAPI.put(path, {status}).then(response => response.data);
 }

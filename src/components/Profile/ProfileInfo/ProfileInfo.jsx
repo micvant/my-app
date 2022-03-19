@@ -18,7 +18,7 @@ function ProfileInfo(props) {
                 <img className={p.avatar}
                      src={props.profile.photos.small}
                      alt='img-photos'></img>
-                <ProfileStatus
+                <ProfileStatus setStatusThunk={props.setStatusThunk}
                 status={props.status}/>
             </div>
         </div>

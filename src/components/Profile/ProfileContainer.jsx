@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getProfileThunk, setUsersProfile, getStatusThunk} from "../../Data/profile-reducer";
+import {getProfileThunk, setUsersProfile, getStatusThunk, setStatusThunk} from "../../Data/profile-reducer";
 import {useMatch} from "react-router";
 import {WithAuthNavigate} from "../../hoc/WithAuthNavigate";
 import {compose} from "redux";
@@ -16,7 +16,7 @@ let ProfileContainerHook = (props) => {
 
     return (
         <>
-            <Profile {...props} status={props.status} profile={props.profile}/>
+            <Profile {...props} status={props.status} profile={props.profile} setStatusThunk={ props.setStatusThunk}/>
         </>
     )
 }
@@ -24,7 +24,7 @@ let ProfileContainerHook = (props) => {
 const ProfileMatch = (props) => {
     let match = useMatch("/profile/:userId/");
     return (
-        <ProfileContainerHook {...props} match={match} getProfileThunk={props.getProfileThunk} getStatusThunk={props.getStatusThunk}/>
+        <ProfileContainerHook {...props} match={match} getProfileThunk={props.getProfileThunk} setStatusThunk ={props.setStatusThunk} getStatusThunk={props.getStatusThunk}/>
        // <ProfileContainer {...props} match={match} getProfileThunk={props.getProfileThunk} getStatusThunk={props.getStatusThunk}/>
     )
 }
@@ -35,6 +35,6 @@ let mapStateToProps = (state) => ({
 });
 
 export default compose(
-    connect(mapStateToProps, {setUsersProfile, getProfileThunk, getStatusThunk}),
+    connect(mapStateToProps, {setUsersProfile, getProfileThunk, getStatusThunk, setStatusThunk}),
     WithAuthNavigate
 )(ProfileMatch);
